@@ -5,6 +5,7 @@ from variable_handler import VariableHandler
 
 
 class SaveForm(Frame):
+    """A ttk frame containing a combobox and buttons for saving and loading Pokémon values."""
     def __init__(self, master: Misc, variable_handler: VariableHandler):
         super().__init__(master, padding=(10, 0, 0, 0))
 
@@ -17,6 +18,7 @@ class SaveForm(Frame):
         Button(self, text='Save', command=self.save_pokemon).grid(row=0, column=1)
 
     def save_pokemon(self):
+        """Ask the user if they really want to save and then call the save function of the variable handler."""
         name = self.saves_combobox.get()
 
         if not name:
@@ -35,6 +37,7 @@ class SaveForm(Frame):
             self.saves_combobox['values'] += (name,)
 
     def load_pokemon(self, *_):
+        """Ask the user if they really want to load and then call the load function of the variable handler"""
         name = self.saves_combobox.get()
         if messagebox.askyesno('Load Pokémon', f'Load Pokémon {name}?\n' 'This will override any unsaved evs.'):
             self.variable_handler.load_pokemon(name)

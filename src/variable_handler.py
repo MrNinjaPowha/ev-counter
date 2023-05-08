@@ -4,6 +4,11 @@ from typing import Any, Callable
 
 
 class VariableHandler(dict):
+    """A dict containing values for the EVCounter. To access a nested value separate the different levels with a colon.
+    If the value being accessed is in a list, just put the index after the last colon.
+
+    Examples: 'generation', 'total:evs', 'goals:3'
+    """
     def __init__(self, data_dir: str = 'saved.pkl'):
         super().__init__({
             'generation': 0,
@@ -24,21 +29,28 @@ class VariableHandler(dict):
         self._trackers: dict[str, list[Callable]] = {}
 
     def set_value(self, name: str, value):
+        """Sets a value in self."""
         self._set_value_in(name, value, self)
         if self._trackers.get(name):
             for tracker in self._trackers.get(name):
                 tracker()
 
     def get_value(self, name: str) -> Any:
+        """Returns a value from self."""
         return self._get_value_from(name, self)
 
     def add_tracker(self, name: str, callback: Callable[[], Any]):
+        """Add a tracker for a value in self.
+        :param name: the name of the value to track.
+        :param callback: the function to be called when the value is changed.
+        """
         if self._trackers.get(name):
             self._trackers.get(name).append(callback)
         else:
             self._trackers.update({name: [callback]})
 
     def save_pokemon(self, name: str):
+        """Saves the current values in self under the specified name."""
         data = self._load_data()
         data.update({name: self._flatten(self)})
         print(data)
@@ -47,12 +59,14 @@ class VariableHandler(dict):
             dump(data, file)
 
     def load_pokemon(self, name: str):
+        """Loads values of the Pokémon with the specified name and sets all values in self."""
         data = self._load_data()
 
         for key, value in data.get(name).items():
             self.set_value(key, value)
 
     def get_saved_pokemons(self) -> list[str]:
+        """Returns a list of all the saved Pokémon names."""
         data = []
 
         for value in sorted(self._load_data().keys()):
