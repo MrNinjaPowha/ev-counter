@@ -53,7 +53,6 @@ class VariableHandler(dict):
         """Saves the current values in self under the specified name."""
         data = self._load_data()
         data.update({name: self._flatten(self)})
-        print(data)
 
         with open(self.data_dir, 'wb') as file:
             dump(data, file)
