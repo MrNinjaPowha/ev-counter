@@ -21,7 +21,7 @@ class EVInput(Entry):
         self._value.trace_add('write', lambda *_: variable_handler.set_value(f'{name}:{stat}', self._value.get()))
         variable_handler.add_tracker(
             # Update value on data load
-            f'{name}:{stat}', lambda: self.add_evs(variable_handler.get_value(f'{name}:{stat}'))
+            f'{name}:{stat}', lambda: self.set_value(variable_handler.get_value(f'{name}:{stat}'))
         )
         variable_handler.add_tracker('generation', lambda: self.add_evs(0))
 
@@ -46,6 +46,10 @@ class EVInput(Entry):
     def get_value(self) -> int:
         """Returns the value of the entry."""
         return self._value.get()
+
+    def set_value(self, value: int):
+        """Set the value of the entry."""
+        self._value.set(value)
 
     def get_max_value(self) -> int:
         """Returns the max ev that can be put into one stat."""
