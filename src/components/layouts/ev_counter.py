@@ -3,9 +3,9 @@ from tkinter.ttk import Frame, Label, Separator
 
 from src.variable_handler import VariableHandler
 from .add_buttons import AddButtons
-from .difference_labels import DifferenceLabels
-from .total_labels import TotalLabels
+from ..blocks.difference_label import DifferenceLabel
 from ..blocks.ev_input import EVInput
+from ..blocks.total_label import TotalLabel
 
 
 class EVCounter(Frame):
@@ -21,21 +21,25 @@ class EVCounter(Frame):
         for column, title in enumerate(['HP', 'Atk', 'Def', 'Sp.Atk', 'Sp.Def', 'Speed']):
             Label(self, text=title).grid(row=1 + column, column=0, padx=10)
 
-        Separator(self, orient='horizontal').grid(row=7, columnspan=6, sticky='EW', pady=2)
+        Separator(self, orient='horizontal').grid(row=7, columnspan=6, sticky='EW', pady=5)
         Label(self, text='Total').grid(row=8)
 
         AddButtons(self, self.add_evs).grid(row=1, column=1, rowspan=6)
 
-        DifferenceLabels(self, variable_handler, first_row=1, column=4)
-        TotalLabels(self, variable_handler, row=8, first_column=2)
+        for i in range(6):
+            DifferenceLabel(self, variable_handler, (f'evs:{i}', f'goals:{i}')).grid(row=1 + i, column=4)
+
+        TotalLabel(self, variable_handler, 'evs').grid(row=8, column=2)
+        TotalLabel(self, variable_handler, 'goals').grid(row=8, column=3)
+        DifferenceLabel(self, variable_handler, ('total:evs', 'total:goals')).grid(row=8, column=4)
 
         self.ev_inputs = []
-        self.goal_inputs = []
         for i in range(6):
             self.ev_inputs.append(EVInput(self, variable_handler, 'evs', i))
             self.ev_inputs[i].grid(row=1 + i, column=2)
-            self.goal_inputs.append(EVInput(self, variable_handler, 'goals', i))
-            self.goal_inputs[i].grid(row=1 + i, column=3)
+
+            # goal inputs
+            EVInput(self, variable_handler, 'goals', i).grid(row=1 + i, column=3)
 
     def add_evs(self, stat: int, value: int, shift_down: bool = False):
         """Adds evs to the specified stat.
