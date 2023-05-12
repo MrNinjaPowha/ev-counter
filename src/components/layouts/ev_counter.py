@@ -16,20 +16,18 @@ class EVCounter(Frame):
         self.variable_handler = variable_handler
 
         # labels
-        horizontal_titles = ['Add', 'EVs', 'Goal', 'Difference']
-        vertical_titles = ['HP', 'Atk', 'Def', 'Sp.Atk', 'Sp.Def', 'Speed']
-        for i in range(4):
-            Label(self, text=horizontal_titles[i]).grid(row=0, column=1 + i, padx=10)
-        for i in range(6):
-            Label(self, text=vertical_titles[i]).grid(row=1 + i, column=0, padx=10)
+        for column, title in enumerate(['Add', 'EVs', 'Goal', 'Difference']):
+            Label(self, text=title).grid(row=0, column=1 + column, padx=10)
+        for column, title in enumerate(['HP', 'Atk', 'Def', 'Sp.Atk', 'Sp.Def', 'Speed']):
+            Label(self, text=title).grid(row=1 + column, column=0, padx=10)
 
         Separator(self, orient='horizontal').grid(row=7, columnspan=6, sticky='EW', pady=2)
         Label(self, text='Total').grid(row=8)
 
         AddButtons(self, self.add_evs).grid(row=1, column=1, rowspan=6)
 
-        self.difference_labels = DifferenceLabels(self, variable_handler, first_row=1, column=4)
-        self.total_labels = TotalLabels(self, variable_handler, row=8, first_column=2)
+        DifferenceLabels(self, variable_handler, first_row=1, column=4)
+        TotalLabels(self, variable_handler, row=8, first_column=2)
 
         self.ev_inputs = []
         self.goal_inputs = []
