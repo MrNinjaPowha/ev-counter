@@ -42,7 +42,7 @@ class TotalLabels:
             goals_total += self.variable_handler.get_value(f'goals:{i}')
 
         self._values.get('evs').set(evs_total)
-        self._values.get('goals').set(evs_total)
+        self._values.get('goals').set(goals_total)
         self._differences_total.set_value(goals_total - evs_total)
 
         self.variable_handler.set_value('total:evs', evs_total)
