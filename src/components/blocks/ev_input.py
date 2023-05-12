@@ -1,8 +1,8 @@
 from tkinter import Misc
 from tkinter.ttk import Entry
 
-from helpers.nullable_int_var import NullableIntVar
-from variable_handler import VariableHandler
+from src.helpers.nullable_int_var import NullableIntVar
+from src.variable_handler import VariableHandler
 
 
 class EVInput(Entry):

@@ -2,7 +2,7 @@ from tkinter import Misc, StringVar
 from tkinter.ttk import Label
 from typing import Literal
 
-from helpers.color import rgb
+from src.helpers.color import rgb
 
 
 class DifferenceLabel(Label):

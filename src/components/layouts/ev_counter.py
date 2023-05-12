@@ -1,7 +1,7 @@
 from tkinter import Misc
 from tkinter.ttk import Frame, Label, Separator
 
-from variable_handler import VariableHandler
+from src.variable_handler import VariableHandler
 from .add_buttons import AddButtons
 from .difference_labels import DifferenceLabels
 from .total_labels import TotalLabels

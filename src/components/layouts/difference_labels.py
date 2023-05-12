@@ -1,7 +1,7 @@
 from tkinter import Misc
 
-from components.blocks.difference_label import DifferenceLabel
-from variable_handler import VariableHandler
+from src.components.blocks.difference_label import DifferenceLabel
+from src.variable_handler import VariableHandler
 
 
 class DifferenceLabels:

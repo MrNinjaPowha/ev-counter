@@ -1,8 +1,8 @@
 from tkinter import Misc, BooleanVar
 from tkinter.ttk import Frame, Checkbutton
-from components import GenerationMenu, ItemMenu, EVCounter
-from components.layouts.save_form import SaveForm
-from variable_handler import VariableHandler
+from src.components import GenerationMenu, ItemMenu, EVCounter
+from src.components.layouts.save_form import SaveForm
+from src.variable_handler import VariableHandler
 
 
 class Window(Frame):

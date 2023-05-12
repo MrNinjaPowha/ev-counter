@@ -1,7 +1,7 @@
 from tkinter import StringVar, Misc
 from tkinter.ttk import OptionMenu
 
-from variable_handler import VariableHandler
+from src.variable_handler import VariableHandler
 
 
 class ItemMenu(OptionMenu):

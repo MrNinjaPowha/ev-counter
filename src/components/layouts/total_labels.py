@@ -2,8 +2,8 @@ from tkinter import Misc, IntVar
 from tkinter.ttk import Label
 from typing import Literal
 
-from components.blocks.difference_label import DifferenceLabel
-from variable_handler import VariableHandler
+from src.components.blocks.difference_label import DifferenceLabel
+from src.variable_handler import VariableHandler
 
 Values = Literal['evs', 'goals']
 

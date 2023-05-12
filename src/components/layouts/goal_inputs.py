@@ -1,7 +1,7 @@
 from tkinter import Misc
 
-from components.blocks.ev_input import EVInput
-from variable_handler import VariableHandler
+from src.components.blocks.ev_input import EVInput
+from src.variable_handler import VariableHandler
 
 
 class GoalInputs:

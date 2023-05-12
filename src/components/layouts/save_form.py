@@ -1,7 +1,7 @@
 from tkinter import Misc, messagebox
 from tkinter.ttk import Frame, Button, Combobox
 
-from variable_handler import VariableHandler
+from src.variable_handler import VariableHandler
 
 
 class SaveForm(Frame):
