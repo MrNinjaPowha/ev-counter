@@ -74,6 +74,7 @@ class VariableHandler(dict):
         return data
 
     def _load_data(self) -> dict[str, dict[str, Any]]:
+        """Returns a dict with the saved data values. If the file does not exist it will be created as an empty file."""
         if not os.path.exists(self.data_dir):
             with open(self.data_dir, 'wb'):
                 pass
@@ -90,6 +91,9 @@ class VariableHandler(dict):
         return data
 
     def _set_value_in(self, name: str, value, values: dict | list):
+        """A recursive function that will split the name parameter at ':' and go through the values parameter, which
+        should at first be self, to find and set the specified value.
+        """
         names = name.split(':', 1)
 
         if len(names) > 1:
@@ -100,6 +104,9 @@ class VariableHandler(dict):
             values[int(name)] = value
 
     def _get_value_from(self, name: str, values: dict | list) -> Any:
+        """A recursive function that will split the name parameter at ':' and go through the values parameter, which
+        should at first be self, to find and return the specified value.
+        """
         value = None
         names = name.split(':', 1)
 
@@ -113,6 +120,9 @@ class VariableHandler(dict):
         return value
 
     def _flatten(self, values: dict | list, prefix: str = '') -> dict[str, Any]:
+        """A recursive function that will return the variable handler as a dict where all inner dicts and lists have
+        been flattened and are indexed with keys in the same style as the name parameter in the get and set functions.
+        """
         flat_dict = {}
 
         for key, value in values.items():
